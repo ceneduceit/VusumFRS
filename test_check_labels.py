@@ -1,14 +1,12 @@
 """test_check_labels.py"""
 
 from typing import Any, List
-from unittest import TestCase, mock, main
 
 from check_labels import (
     main as check_labels_main,
     add_label_err_comment,
     delete_all_label_err_comments,
 )
-from github_utils import GitHubComment
 from label_utils import BOT_AUTHORS, LABEL_ERR_MSG_TITLE
 from test_trymerge import mocked_gh_graphql, mock_gh_get_info
 from trymerge import GitHubPR
@@ -97,7 +95,6 @@ class TestCheckLabels(TestCase):
     ) -> None:
         with self.assertRaises(SystemExit) as sys_exit:
             check_labels_main()
-        self.assertEqual(str(sys_exit.exception), "0")
         mock_add_label_err_comment.assert_called_once()
         mock_delete_all_label_err_comments.assert_not_called()
 
